@@ -20,8 +20,13 @@ q = 'yes'
 while q =='yes':
     q = raw_input('Any other questions (yes/no)? ')
     if q =='no':
-        print 'Thank you for using WolframAlpha Bot'
-        break
+        q = raw_input('Are you sure you want to exit (yes/no)? ')
+        if q == 'yes':
+            print 'Thank you for using WolframAlpha Bot!'
+            break
+        else:
+            query = raw_input('Enter your math question: ')
+            print wolfram(query)
     elif q =='yes':
         query = raw_input('Enter your math question: ')
         print wolfram(query)
