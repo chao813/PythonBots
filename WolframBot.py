@@ -27,6 +27,7 @@ while q =='yes':
         else:
             query = raw_input('Enter your math question: ')
             print wolfram(query)
+            q = 'yes'
     elif q =='yes':
         query = raw_input('Enter your math question: ')
         print wolfram(query)
