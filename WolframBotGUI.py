@@ -1,8 +1,10 @@
 from Tkinter import *
-import wolframalpha
 import ttk
 from PIL import ImageTk
 import base64, zlib
+import inflect
+from multiprocessing import Queue
+import wolframalpha
 
 app_id='PA237Q-XA42375UEE'
 client = wolframalpha.Client(app_id)
@@ -39,10 +41,10 @@ root.title("Math Solver")
 root.geometry('350x100+650+300')
 
 #Top right icon to transparent
-ICON = zlib.decompress(base64.b64decode('eJxjYGAEQgEBBiDJwZDBy'
+"""ICON = zlib.decompress(base64.b64decode('eJxjYGAEQgEBBiDJwZDBy'
     'sAgxsDAoAHEQCEGBQaIOAg4sDIgACMUj4JRMApGwQgF/ykEAFXxQRc='))
 image=ImageTk.PhotoImage(data=ICON)
-root.tk.call('wm', 'iconphoto', root._w, image)  
+root.tk.call('wm', 'iconphoto', root._w, image)  """
 
 
 feet = StringVar()
