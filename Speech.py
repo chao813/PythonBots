@@ -40,12 +40,12 @@ def perform(text):
     elif "mail" in text:
         webbrowser.get('chrome').open_new_tab('portal.office.com')
     elif "wolfram" in text:
-        try:
+        try: 
             res = client.query(text)
             ans = (next(res.results).text)
         except:
             ans ='I don\'t understand your question, please try again'
-        return ans
+        return ans 
         
         
         
