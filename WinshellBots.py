@@ -12,7 +12,7 @@ def desktop():
     
     
 root = Tk()
-root.title("Basic Winshell Operations")
+root.title("Basic Winshell Operations") 
 root.geometry('350x100+650+300')
 #calculate button
 button = Button(text="Empty Recycle Bin", command=empty)
