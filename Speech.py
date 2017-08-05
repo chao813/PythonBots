@@ -7,7 +7,7 @@ import win32com.client as wincl
 
 speak = wincl.Dispatch("SAPI.SpVoice")
 
-#Wolframalpha 
+#Wolframalpha API I.D.
 app_id='PA237Q-XA42375UEE'
 client = wolframalpha.Client(app_id)
 
@@ -18,9 +18,9 @@ webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path)) #
 def initialize():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        speak.Speak("Hello, I'm ready to listen")
-        #print "Hello, ready to listen."
-        
+        speak.Speak("Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, and open desktop")
+        print "Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, and open desktop"
+        speak.Speak("I'm ready to listen")
         audio = r.listen(source)
     text = ''
     try:
@@ -48,19 +48,20 @@ def perform(text):
     elif "mail" in text:
         speak.Speak("opening mail")
         webbrowser.get('chrome').open_new_tab('portal.office.com')
-    elif "wolfram" in text:
-        r = sr.Recognizer()
+    elif "math" in text:
+        r2 = sr.Recognizer()
         with sr.Microphone() as source:
             speak.Speak("Ask your math question")
-            audio = r.listen(source)
+            audio2 = r2.listen(source)
         question = ''
         try:
-            question = r.recognize_google(audio)
+            question = r2.recognize_google(audio2)
             print "Device thinks you said, " + question
             try: 
                 res = client.query(question)
                 ans = (next(res.results).text)
                 speak.Speak(ans)
+                print ans
             except:
                 speak.Speak('I don\'t understand your question')
             #print ans
@@ -77,9 +78,7 @@ def perform(text):
         speak.Speak("opening desktop")
         winshell.desktop(common=True)
         
-
-        
         
         
 data = initialize()
-perform(data)    
+perform(data)  
