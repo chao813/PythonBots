@@ -1,13 +1,15 @@
 import spotipy
+import sys
 
-birdy_uri = 'spotify:artist:2WX2uTcsvV5OnS0inACecP'
 spotify = spotipy.Spotify()
 
-results = spotify.artist_albums(birdy_uri, album_type='album')
-albums = results['items']
-while results['next']:
-    results = spotify.next(results)
-    albums.extend(results['items'])
+if len(sys.argv) > 1:
+    name = ' '.join(sys.argv[1:])
+else:
+    name = 'Radiohead'
 
-for album in albums:
-    print(album['name'])
+results = spotify.search(q='artist:' + name, type='artist')
+items = results['artists']['items']
+if len(items) > 0:
+    artist = items[0]
+    print artist['name'], artist['images'][0]['url']
