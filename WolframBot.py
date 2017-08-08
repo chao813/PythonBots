@@ -6,7 +6,7 @@ app_id='PA237Q-XA42375UEE'
 
 client = wolframalpha.Client(app_id)
 
-def wolfram(query):
+def wolfram(query): 
     res = client.query(str(query))
     try:
         ans=next(res.results).text
