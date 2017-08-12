@@ -9,7 +9,7 @@ client = wolframalpha.Client(app_id)
 def wolfram(query): 
     res = client.query(str(query))
     try:
-        ans=next(res.results).text
+        ans=next(res.results).text 
     except:
         ans ='I don\'t understand, please try again'
     return ans
