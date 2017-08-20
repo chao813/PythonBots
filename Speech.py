@@ -32,8 +32,11 @@ time1 = ''
 root.title('Jarvis')
 #root.geometry()
 root.state('zoomed')
-clock = Label(root, font=('times', 20, 'bold'))
-#clock.pack(fill=BOTH, expand=1)
+clock = Label(root, font=('Comic Sans MS', 50), bg = "light blue")
+clock.place(relx=0.5, rely=0.9, anchor=CENTER)
+#welcome = Label(text = 'Welcome User', font=('Comic Sans MS', 40, 'bold'), bg = "light blue")
+#welcome.place(relx=0.5, rely=0.1, anchor=CENTER)
+
 def tick():
     global time1
     # get the current local time from the PC
@@ -55,6 +58,7 @@ def initialize():
         speak.Speak("Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, open desktop, look up something on wikipedia, and lock computer")
         print "Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, open desktop, look up something on wikipedia, and lock computer"
         print "Keywords: Search, Video, Mail, Math, recycle bin, desktop, wikipedia, lock computer"
+        time.sleep(3)
         speak.Speak("I'm ready to listen")
         audio = r.listen(source)
     text = ''
