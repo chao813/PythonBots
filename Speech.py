@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import wolframalpha
 import winshell
 import win32com.client as wincl
+import wikipedia
+
 
 speak = wincl.Dispatch("SAPI.SpVoice")
 
@@ -77,6 +79,23 @@ def perform(text):
     elif "desktop" in text:
         speak.Speak("opening desktop")
         winshell.desktop(common=True)
+    elif "wikipedia" in text:
+        r2 = sr.Recognizer()
+        with sr.Microphone() as source:
+            speak.Speak("What do you want to look up on wikipedia")
+            audio2 = r2.listen(source)
+        question = ''
+        try:
+            question = r2.recognize_google(audio2)
+            print "Device thinks you said, " + question
+            ans = wikipedia.summary(question)
+            speak.Speak(ans)
+            print ans
+        except sr.UnknownValueError:
+            print "Device could not understand what you said"
+        except sr.RequestError as e:
+            print "Device could not receive request from user {0}".format(e)
+            
         
         
         
