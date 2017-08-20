@@ -9,7 +9,7 @@ speak = wincl.Dispatch("SAPI.SpVoice")
 
 #Wolframalpha API I.D. 
 app_id='PA237Q-XA42375UEE'  
-client = wolframalpha.Client(app_id)
+client = wolframalpha.Client(app_id) 
 
 chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe' 
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path)) #Ensures Chrome opens instead of IE
