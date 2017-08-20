@@ -6,6 +6,10 @@ import winshell
 import win32com.client as wincl
 import wikipedia
 import ctypes
+from Tkinter import *
+import ttk
+import time
+from PIL import Image, ImageTk
 
 
 speak = wincl.Dispatch("SAPI.SpVoice")
@@ -16,6 +20,33 @@ client = wolframalpha.Client(app_id)
 
 chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe' 
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path)) #Ensures Chrome opens instead of IE
+
+root = Tk()
+
+im = Image.open("C:/Python27/nature.jpg")
+tkimage = ImageTk.PhotoImage(im)
+myvar= Label(root,image = tkimage)
+myvar.place(x=0, y=0, relwidth=1, relheight=1)
+
+time1 = ''
+root.title('Jarvis')
+#root.geometry()
+root.state('zoomed')
+clock = Label(root, font=('times', 20, 'bold'))
+#clock.pack(fill=BOTH, expand=1)
+def tick():
+    global time1
+    # get the current local time from the PC
+    time2 = time.strftime('%H:%M:%S')
+    # if time string has changed, update it
+    if time2 != time1:
+        time1 = time2
+        clock.config(text=time2)
+    # calls itself every 200 milliseconds
+    # to update the time display as needed
+    # could use >200 ms, but display gets jerky
+    clock.after(200, tick)
+tick()
 
 #Converts speech to text
 def initialize():
@@ -99,8 +130,12 @@ def perform(text):
             print "Device could not receive request from user {0}".format(e)
     elif "lock computer" in text:
         ctypes.windll.user32.LockWorkStation()
-        
-        
-        
+
+
+
+
 data = initialize()
-perform(data)  
+perform(data)
+root.mainloop() 
+
+
