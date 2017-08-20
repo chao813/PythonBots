@@ -5,6 +5,7 @@ import wolframalpha
 import winshell
 import win32com.client as wincl
 import wikipedia
+import ctypes
 
 
 speak = wincl.Dispatch("SAPI.SpVoice")
@@ -20,8 +21,9 @@ webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path)) #
 def initialize():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        speak.Speak("Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, and open desktop")
-        print "Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, and open desktop"
+        speak.Speak("Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, open desktop, look up something on wikipedia, and lock computer")
+        print "Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, open desktop, look up something on wikipedia, and lock computer"
+        print "Keywords: Search, Video, Mail, Math, recycle bin, desktop, wikipedia, lock computer"
         speak.Speak("I'm ready to listen")
         audio = r.listen(source)
     text = ''
@@ -72,7 +74,7 @@ def perform(text):
         except sr.RequestError as e:
             print "Device could not receive request from user {0}".format(e)
         
-    elif "empty" in text:
+    elif "recycle bin" in text:
         recycle_bin = winshell.recycle_bin()
         speak.Speak("emptying recycle bin")
         recycle_bin.empty(confirm=False, show_progress=False, sound=True)
@@ -95,7 +97,8 @@ def perform(text):
             print "Device could not understand what you said"
         except sr.RequestError as e:
             print "Device could not receive request from user {0}".format(e)
-            
+    elif "lock computer" in text:
+        ctypes.windll.user32.LockWorkStation()
         
         
         
