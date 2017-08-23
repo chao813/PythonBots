@@ -21,35 +21,7 @@ client = wolframalpha.Client(app_id)
 chrome_path = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe' 
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path)) #Ensures Chrome opens instead of IE
 
-root = Tk()
 
-im = Image.open("C:/Python27/nature.jpg")
-tkimage = ImageTk.PhotoImage(im)
-myvar= Label(root,image = tkimage)
-myvar.place(x=0, y=0, relwidth=1, relheight=1)
-
-time1 = ''
-root.title('Jarvis')
-#root.geometry()
-root.state('zoomed')
-clock = Label(root, font=('Comic Sans MS', 50), bg = "light blue")
-clock.place(relx=0.5, rely=0.9, anchor=CENTER)
-#welcome = Label(text = 'Welcome User', font=('Comic Sans MS', 40, 'bold'), bg = "light blue")
-#welcome.place(relx=0.5, rely=0.1, anchor=CENTER)
-
-def tick():
-    global time1
-    # get the current local time from the PC
-    time2 = time.strftime('%H:%M:%S')
-    # if time string has changed, update it
-    if time2 != time1:
-        time1 = time2
-        clock.config(text=time2)
-    # calls itself every 200 milliseconds
-    # to update the time display as needed
-    # could use >200 ms, but display gets jerky
-    clock.after(200, tick)
-tick()
 
 #Converts speech to text
 def initialize():
@@ -57,7 +29,10 @@ def initialize():
     with sr.Microphone() as source:
         speak.Speak("Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, open desktop, look up something on wikipedia, and lock computer")
         print "Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, open desktop, look up something on wikipedia, and lock computer"
-        print "Keywords: Search, Video, Mail, Math, recycle bin, desktop, wikipedia, lock computer"
+        global meters
+        meters = "Keywords: Search, Video, Mail, Math, recycle bin, desktop, wikipedia, lock computer"
+        
+        
         time.sleep(3)
         speak.Speak("I'm ready to listen")
         audio = r.listen(source)
@@ -137,9 +112,59 @@ def perform(text):
 
 
 
+def calculate():
+    data = initialize()
+    perform(data)
+    
+def clear_text(*args):
+    meters_entry.delete(0,'end')
+    
+       
+    
+root = Tk()
 
-data = initialize()
-perform(data)
+im = Image.open("C:/Python27/nature.jpg")
+tkimage = ImageTk.PhotoImage(im)
+myvar= Label(root,image = tkimage)
+myvar.place(x=0, y=0, relwidth=1, relheight=1)
+
+
+meters = StringVar()
+meters_entry = ttk.Entry(textvariable=meters)
+meters_entry.grid(column=2, row=2, sticky= W)
+
+#clear button
+clear_button = Button(text = "Clear", command = clear_text)
+clear_button.grid(column = 0, row=8, sticky = E)
+clear_button['fg'] = 'black'
+clear_button['bg'] = 'light blue'    
+
+
+time1 = ''
+root.title('Jarvis')
+#root.geometry()
+root.state('zoomed')
+"""clock = Label(root, font=('Comic Sans MS', 50), bg = "light blue")
+clock.place(relx=0.5, rely=0.9, anchor=CENTER)"""
+#welcome = Label(text = 'Welcome User', font=('Comic Sans MS', 40, 'bold'), bg = "light blue")
+#welcome.place(relx=0.5, rely=0.1, anchor=CENTER)
+
+ttk.Button(root, text="Press to start", command=calculate).grid(column=3, row=3)
+
+"""def tick():
+    global time1
+    # get the current local time from the PC
+    time2 = time.strftime('%H:%M:%S')
+    # if time string has changed, update it
+    if time2 != time1:
+        time1 = time2
+        clock.config(text=time2)
+    # calls itself every 200 milliseconds
+    # to update the time display as needed
+    # could use >200 ms, but display gets jerky
+    clock.after(200, tick)
+tick()"""
+
 root.mainloop() 
 
 
