@@ -24,7 +24,7 @@ webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path)) #
 
 
 #Converts speech to text
-def initialize():
+def initialize(): 
     r = sr.Recognizer()
     with sr.Microphone() as source:
         speak.Speak("Ask me to search anything, play any video on youtube, open mail, solve any math question, empty recycle bin, open desktop, look up something on wikipedia, and lock computer")
